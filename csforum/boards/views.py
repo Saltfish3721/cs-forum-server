@@ -3,4 +3,5 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse('Hello, world!')
+	#why does it require request param?
+    return render(request,'index.html',{"name":"saltfish","learnning":{"python":1,"js":2}})
