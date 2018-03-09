@@ -6,6 +6,56 @@ from django.http import HttpResponse
 
 from . import models
 
+
+
+def index(request):
+
+    articleInfos = models.articleInfo.objects.all()[:7]
+    print(articleInfos)#<QuerySet [<articleInfo: first!!!>, <articleInfo: secont!!!!>]>
+    print(articleInfos[0])#first!!!
+    print(type(articleInfos[0]))#<class 'boards.models.articleInfo'>
+    print(articleInfos[0].title)#first!!!
+    print(articleInfos[0].info)#66666666666666
+    return render(request,'index.html',{'articleInfos':articleInfos})
+
+
+def article(request,articleID):
+
+    # articleBody = models.articleBody.objects.filter(articleID=articleID)
+    # print(type(articleBody))
+    articleBody = models.articleBody.objects.get(pk=articleID)
+
+    return render(request,'article.html',{'articleBody':articleBody})
+
+
+def users(request):
+
+    user = models.articleInfo.objects.get(pk=10)
+    return render(request,'user.html',{'user':user})
+
+
+def editarticle(request):
+    return render(request,'editarticle.html')
+
+def postarticle(request):
+    title   = request.POST.get('title','TITLE')
+    content = request.POST.get('content','CONTENT')
+    models.articleBody.objects.create(title=title,content=content)
+    return render(request,'index.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Create your views here.
 def home(request):
 
@@ -31,8 +81,5 @@ def home(request):
 
 	#why does it require request param?
     return render(request,'index.html',{'article':article})
-
-
-
 
     #加了一层.objects 是为了放在和自定义属性冲突吧

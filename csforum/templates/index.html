@@ -4,10 +4,13 @@
 	<title>hi</title>
 </head>
 <body>
-<h1>hello,{{name}}!!!</h1>
+<h1>hello,you gays!!!</h1>
 
-<h1>{{article.title}}</h1>
-<p>{{article.content}}</p>
+<!-- 之前应该是缓存没有刷新，所以数据没有渲染，debug了半天······· -->
+{% for articleInfo in articleInfos %}
+<h1>title:{{articleInfo.title}}</h1>
+<p>info:{{articleInfo.info}}</p>
+{% endfor %}
 
 </body>
 </html>
