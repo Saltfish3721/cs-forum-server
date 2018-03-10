@@ -1,12 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
-#from models import Test 为什么不行？？？
-
 from . import models
-
-
 
 def index(request):
 
@@ -38,9 +33,18 @@ def editarticle(request):
     return render(request,'editarticle.html')
 
 def postarticle(request):
-    title   = request.POST.get('title','TITLE')
-    content = request.POST.get('content','CONTENT')
-    models.articleBody.objects.create(title=title,content=content)
+
+    title     = request.POST.get('title','TITLE')
+    content   = request.POST.get('content','CONTENT')
+    article = models.articleBody.objects.create(title=title,content=content)
+
+    # authorID    = request.POST.get('authorID','authorID')
+    authorID = 1
+    print(type(models.articleInfo.objects.latest('articleID').articleID_id))
+    articleID = models.articleInfo.objects.latest('articleID').id + 1
+    models.articleInfo.objects.create(articleID=article,title=title,info=content)
+
+
     return render(request,'index.html')
 
 
