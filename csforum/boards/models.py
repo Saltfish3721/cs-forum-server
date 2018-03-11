@@ -1,30 +1,32 @@
 from django.db import models
 
 
-class articleInfo(models.Model):
+class article(models.Model):
+
+	articleID  = models.AutoField(primary_key=True)
 
 	title      = models.CharField(max_length=32,default="title")
-	info       = models.TextField(null=True)
-	articleID  = models.ForeignKey('articleBody', on_delete=models.CASCADE)
-	authorID   = models.ForeignKey('users', on_delete=models.CASCADE)
+	content    = models.TextField(null=True)
+	
 	up         = models.IntegerField(default=0)
 	down       = models.IntegerField(default=0)
 	pageview   = models.IntegerField(default=0)
 	submitDate = models.DateField(auto_now = True)
-
-	def __str__(self):
-		return self.title
-
-
-class articleBody(models.Model):
-
-	articleID  = models.IntegerField(primary_key=True)
-	title      = models.CharField(max_length=32)
-	topic      = models.CharField(max_length=32)
 	content    = models.TextField(null=True)
 
 	def __str__(self):
 		return self.title
+
+
+# class articleBody(models.Model):
+
+# 	articleID  = models.IntegerField(primary_key=True)
+# 	title      = models.CharField(max_length=32)
+# 	topic      = models.CharField(max_length=32)
+# 	content    = models.TextField(null=True)
+
+# 	def __str__(self):
+# 		return self.title
 
 
 class users(models.Model):

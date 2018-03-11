@@ -20,7 +20,7 @@ from boards import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^post/article$', views.postarticle, name='postarticle'),
+    url(r'^article/post$', views.postarticle, name='postarticle'),
     url(r'^article/edit$', views.editarticle, name='editarticle'),
     url(r'^article/(?P<articleID>[0-9]+)$', views.article, name='article'),
     url(r'^users$', views.users, name='users'),
